@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.MainPage"
+             x:Name="ThisView"
+             BindingContext="{x:Reference Name=ThisView}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0">
+            <Label Margin="0,30,0,0"
+                   Text="Initially Tappable"
+                   HorizontalTextAlignment="Center" />
+            <Label
+                HorizontalTextAlignment="Center"
+                Text="{Binding IsEnabled}"
+                BindingContext="{x:Reference Master}" />
+
+            <Label HorizontalTextAlignment="Center"
+                   x:Name="Master"
+                   Text="Master"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   IsEnabled="{Binding InitiallyTappableViewModel.IsTapable}">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding InitiallyTappableViewModel.ChangeSlaveTextCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+
+            <Label HorizontalTextAlignment="Center"
+                   Text="{Binding InitiallyTappableViewModel.SlaveLabelText}" />
+
+            <Button Command="{Binding InitiallyTappableViewModel.ToggleIsLabelTapableCommand}"
+                    Text="Toggle Label Tappyness" />
+        </StackLayout>
+
+        <BoxView Grid.Row="1"
+                 Color="#676767" />
+
+        <StackLayout Grid.Row="2">
+            <Label Margin="0,30,0,0"
+                   Text="Initially Not Tappable"
+                   HorizontalTextAlignment="Center" />
+            <Label HorizontalTextAlignment="Center"
+                   Text="{Binding IsEnabled}"
+                   BindingContext="{x:Reference MasterNotTapable}" />
+
+            <Label HorizontalTextAlignment="Center"
+                   x:Name="MasterNotTapable"
+                   Text="Master"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   IsEnabled="{Binding InitiallyNotTappableViewModel.IsTapable}">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding InitiallyNotTappableViewModel.ChangeSlaveTextCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+
+            <Label HorizontalTextAlignment="Center"
+                   Text="{Binding InitiallyNotTappableViewModel.SlaveLabelText}" />
+
+            <Button Command="{Binding InitiallyNotTappableViewModel.ToggleIsLabelTapableCommand}"
+                    Text="Toggle Label Tappyness" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
